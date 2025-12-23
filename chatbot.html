@@ -23,7 +23,6 @@
       }
 
       function ChatMessages({ message, sender }) {
-
         return (
           <div>
             {sender === "chatbot" && (
@@ -36,7 +35,7 @@
       }
 
       function ChatMessagesComp() {
-        const ChatMessagesArray = [
+		const array = React.useState([
           { message: "hello chatbot", sender: "user", id: "id1" },
           { message: "how can I help you?", sender: "chatbot", id: "id2" },
           { message: "I need help with my account", sender: "user", id: "id3" },
@@ -44,10 +43,35 @@
             message: "Sure, I can help with that",
             sender: "chatbot",
             id: "id4",
-          },
-        ];
+          }
+        ]);
+		const chatMessages = array[0];
+        // const ChatMessagesArray = [
+        //   { message: "hello chatbot", sender: "user", id: "id1" },
+        //   { message: "how can I help you?", sender: "chatbot", id: "id2" },
+        //   { message: "I need help with my account", sender: "user", id: "id3" },
+        //   {
+        //     message: "Sure, I can help with that",
+        //     sender: "chatbot",
+        //     id: "id4",
+        //   }
+        // ];
+
+        function test() {
+			ChatMessagesArray.push(
+				{ 
+					message: "This is a new message", 
+					sender: "user", 
+					id: crypto.randomUUID() 
+				}
+				);
+
+			console.log(ChatMessagesArray);
+        }
+
         return (
           <>
+            <button onClick={test}> Test </button>
             {ChatMessagesArray.map((chatMessage) => {
               return (
                 <ChatMessages
