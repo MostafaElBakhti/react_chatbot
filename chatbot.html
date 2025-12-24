@@ -22,7 +22,7 @@
         );
       }
 
-      function ChatMessages({ message, sender }) {
+      function ChatMessage({ message, sender }) {
 
         return (
           <div>
@@ -36,7 +36,7 @@
       }
 
       function ChatMessagesComp() {
-        const ChatMessagesArray = [
+        const ChatMessages = [
           { message: "hello chatbot", sender: "user", id: "id1" },
           { message: "how can I help you?", sender: "chatbot", id: "id2" },
           { message: "I need help with my account", sender: "user", id: "id3" },
@@ -46,11 +46,17 @@
             id: "id4",
           },
         ];
+          function SendMessages() {
+            console.log("test");
+            
+          }
+
         return (
           <>
-            {ChatMessagesArray.map((chatMessage) => {
+            <button onClick={SendMessages}>Load Messages</button>
+            {ChatMessages.map((chatMessage) => {
               return (
-                <ChatMessages
+                <ChatMessage
                   message={chatMessage.message}
                   sender={chatMessage.sender}
                   key={chatMessage.id}
