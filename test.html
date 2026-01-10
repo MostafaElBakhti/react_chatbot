@@ -13,27 +13,19 @@
 
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
-      function ChatMessage({sender, message}) {
-
+      function ChatMessage({ sender, message }) {
         return (
           <div>
             {sender === "chatbot" && (
               <img src="robot.png" width="50" height="50" />
             )}
             {message}
-            {sender === "user" && (
-              <img src="user.png" width="50" height="50" />
-            )}
+            {sender === "user" && <img src="user.png" width="50" height="50" />}
           </div>
         );
       }
 
       function ChatInput() {
-        const ChatMessages = [
-          { message: "Hello!", sender: "chatbot", id: 1 },
-          { message: "Hi there!", sender: "user", id: 2 },
-        ];
-
         return (
           <>
             <input type="text" placeholder="Type your message..." size="30" />
@@ -43,10 +35,24 @@
       }
 
       function App() {
+
+        const ChatMessages = [
+          { message: "Hello!", sender: "chatbot", id: 1 },
+          { message: "Hi there!", sender: "user", id: 2 },
+        ];
+        const test = ChatMessages.map((test)=>{          
+          return <ChatMessage 
+          message={test.message} 
+          sender={test.sender} 
+          id={test.id}
+          />
+        })
+
         return (
           <>
             <ChatInput />
             <ChatMessage message="Hello!" sender="user" />
+            <ChatMessage />
             <ChatMessage message="Hi there!" sender="chatbot" />
             <ChatMessage message="whats the date today?" sender="user" />
             <ChatMessage
