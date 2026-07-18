@@ -14,11 +14,36 @@
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
 
-        function ChatInput() {
+        function ChatInput( {chatMessages, setChatMessages} ) {
+
+            const [inputText , setInputText] = React.useState('')
+
+            function saveInputText(event) {
+                setInputText(event.target.value);
+            }
+
+            function sendMessage() {
+                setChatMessages([
+                    ...chatMessages,
+                    {
+                    message: inputText,
+                    sender: 'user',
+                    id : crypto.randomUUID()
+                    }
+                ])
+
+                setInputText('')
+            }
+            
             return (
                 <>
-                    <input placeholder='type anythings'  size='30'/>
-                    <button>Send</button>
+                    <input 
+                        placeholder='type anythings'  
+                        size='30'
+                        onChange={saveInputText}
+                        value={inputText}
+                    />
+                    <button onClick= {sendMessage} >Send</button>
                 </>
             )
         }
@@ -37,16 +62,23 @@
         }
 
         function ChatMessages( {chatMessages} ) {
+
             return (
                 <>
+
                     {chatMessages.map( (chatMessage) => {
                         return (
-                                < ChatMessage message={chatMessage.message} sender={chatMessage.sender} key={chatMessage.id} />
+                                < ChatMessage 
+                                    message={chatMessage.message} 
+                                    sender={chatMessage.sender} 
+                                    key={chatMessage.id} 
+                                />
                         )
                     })}
                 </>
             )
         }
+        
 
         function App() {
 
@@ -57,16 +89,13 @@
                 {message: 'of course , slak ajmi',sender: 'robot' , id: '4'}
             
             ])
-            // chatMessages.map( (test) => {
-            //     return (
-            //         <ChatMessage message= {test.message} sender={test.sender} id={test.id} />
-            //     )
-            // } ) ; 
-            
 
             return (
                 <>
-                    <ChatInput />
+                    <ChatInput 
+                        chatMessages={chatMessages} 
+                        setChatMessages={setChatMessages}
+                    />
                     <ChatMessages chatMessages={chatMessages} />
                 </>
             )
