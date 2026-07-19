@@ -19,29 +19,44 @@
 
     <script type="text/babel">
 
-        function Counter ( {counter, setCounter , ClickButton} ) {
-            return (
-                <>
-                    { counter == 1 && (<button onClick={ClickButton} >Clicked {counter} time</button>)}
-                    { counter != 1 && (<button onClick={ClickButton} >Clicked {counter} times</button>)}
-
-                </>
-            )
-        }
-
         function App() {
-            const [counter , setCounter] = React.useState(0)
 
-            function ClickButton() {                
-                setCounter(counter + 1)
+            const [text , setText] = React.useState('')
+
+            function test(event) {
+                setText(event.target.value);
                 
             }
-            
+
+            function reset () {
+                setText('')
+            }
+
+            function putText() {
+                setText('Alice')
+            }
+
+            function slak(event) {
+                const enter = event.key
+                if (enter == 'Enter' ) {
+                    
+                }
+                
+            }
+
             return (
                 <>
-                    < Counter  counter={counter} setCounter={setCounter} ClickButton={ClickButton} />
-                    < Counter  counter={counter} setCounter={setCounter} ClickButton={ClickButton} />
-                    <button  onClick={ () => setCounter(0) } >Reset</button>
+                    <input 
+                        placeholder="write" 
+                        size="30" 
+                        onChange={test}
+                        onKeyDown={slak}
+                        value={text}
+                    />
+                    <button onClick={reset} >Reset</button>
+                    <button onClick={putText} >Exemple</button>
+                    <p>Hello {text} </p>
+
 
                 </>
             )
