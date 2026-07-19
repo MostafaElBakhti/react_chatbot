@@ -6,23 +6,52 @@
     <title>Document</title>
 </head>
 <body>
-    <script>
 
-        test = []
+    <div class="container"></div>
+    <script src="react-basics.js"></script>
 
-        const myMessages = [
-          {message: 'hello chatbot',sender: 'user'},
-          {message: 'hello! how can I help you?',sender: 'robot'},
-          {message: 'can you get me todays date',sender: 'user'},
-          {message: 'Today is september 27',sender: 'robot'},
-        ]
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    
+    <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
 
-        const res = myMessages.map( (text) => {
-            return test.push(text.message)
-        })
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
 
-        console.log(test);
+    <script type="text/babel">
+
+        function Counter ( {counter, setCounter , ClickButton} ) {
+            return (
+                <>
+                    { counter == 1 && (<button onClick={ClickButton} >Clicked {counter} time</button>)}
+                    { counter != 1 && (<button onClick={ClickButton} >Clicked {counter} times</button>)}
+
+                </>
+            )
+        }
+
+        function App() {
+            const [counter , setCounter] = React.useState(0)
+
+            function ClickButton() {                
+                setCounter(counter + 1)
+                
+            }
+            
+            return (
+                <>
+                    < Counter  counter={counter} setCounter={setCounter} ClickButton={ClickButton} />
+                    < Counter  counter={counter} setCounter={setCounter} ClickButton={ClickButton} />
+                    <button  onClick={ () => setCounter(0) } >Reset</button>
+
+                </>
+            )
+        } 
+
+
+        const container = document.querySelector('.container')
+        ReactDOM.createRoot(container).render(<App />)
         
+
     </script>
 </body>
 </html>
