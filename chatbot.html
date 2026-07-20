@@ -2,6 +2,52 @@
 <html>
   <head>
     <title>Chatbot</title>
+    <style>
+      body {
+        display: flex;
+        
+      }
+      .js-container {
+        padding: 10px ;
+        border : 5px solid black ;
+        margin: auto;
+        height: 100vh;
+        /* width: ; */
+      }
+      
+
+
+      .send-button {
+        background-color: rgb(68, 138, 68);
+        border: none ;
+        font-size: 15px  ;
+        padding: 12px 20px;
+        border-radius: 5px;
+        color: white;
+        margin-left: 10px ;
+        cursor: pointer;
+      }
+
+      .chat-input {
+        padding: 12px 15px;
+        border-radius: 10px;
+        border-width: 1px;
+        font-size: 15px;
+
+        flex-grow: 1;
+      }
+
+      .chat-input-container {
+        display: flex;
+      }
+
+      .app-container {
+        max-width: 600px;
+        margin-left: auto ;
+        margin-right: auto ;
+      }
+
+    </style>
   </head>
   <body>
     <div class="js-container"></div>
@@ -54,21 +100,27 @@
         }
 
         return (
-          <>
+          <div className="chat-input-container" >
             <input 
               placeholder="Send Message to the chatbot" 
               size="30" 
               onChange={saveInputText}
               value={inputText}
+              className="chat-input"
             />
-            <button onClick={sendMessage} >Send</button>
-          </>
+            <button 
+              onClick={sendMessage} 
+              className="send-button"
+            >Send</button>
+          </div>
         )
       }
 
       function ChatMessage({message , sender}) {
           return (
-            <div>
+            <div className={ sender ===
+               'user' ? 'chat-message-user' : 
+               'chat-message-robot' } >
               {sender === "robot" && (<img src="robot.png" width="50px"/>)}
               {message}
               {sender === "user" && (<img src="user.png" width="50px"/>)}
@@ -105,7 +157,7 @@
         ])
 
         return (
-          <>
+          <div className="app-container" >
             <ChatInput 
               chatMessages={chatMessages}
               setChatMessages={setChatMessages}
@@ -115,7 +167,7 @@
               chatMessages={chatMessages}
             />
 
-          </>
+          </div>
         )
       }
 
